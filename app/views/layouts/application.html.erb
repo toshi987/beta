@@ -13,8 +13,19 @@
       <ul>
         <li><a href="/tops">アプリ紹介</a></li>
         <li><a href="/blogs">日本酒ブログ</a></li>
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "#{key}") %>
+        <% end %>
+        <% if logged_in? %>
+          <li><%= link_to "Profile", user_path(current_user.id) %></li>
+          <li><%= link_to "Logout", session_path(current_user.id), method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign up", new_user_path %></li>
+          <li><%= link_to "Login", new_session_path %></li>
+        <% end %>
       </ul>
     </header>
+
     <%= yield %>
     <footer>
      <p>Toshiki Yoshimizu 2018/7/2</p>

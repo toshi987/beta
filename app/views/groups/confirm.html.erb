@@ -1,0 +1,16 @@
+<h3>Confirm</h3>
+
+<%= form_with(model: @group, url: groups_path, local: true) do |form| %>
+  <%= form.hidden_field :groupname %>
+  <%= form.hidden_field :content %>
+
+  <p>Group name:<%= @group.groupname %></p>
+  <p>Description:<%= @group.content %></p>
+  <%= form.submit  "Create new group" %>
+<% end %>
+
+<%= form_with(model: @group, url: new_group_path, local: true, method: 'get') do |form| %>
+  <%= form.hidden_field :groupname %>
+  <%= form.hidden_field :content %>
+  <%= form.submit "Back" , name: 'back' %>
+<% end %>

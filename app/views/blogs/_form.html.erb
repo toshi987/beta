@@ -1,7 +1,7 @@
 <%= form_with(model: @blog, local: true, url: choose_new_or_edit) do |form| %>
   <% if @blog.errors.any? %>
     <div id="error_explanation">
-      <h2><%= @blog.errors.count %>件のエラーがあります。</h2>
+      <h2><%= @blog.errors.count %> errors are existed。</h2>
       <ul>
 
       <% @blog.errors.full_messages.each do |msg| %>
@@ -19,7 +19,9 @@
     <%= form.label :content %>
     <%= form.text_field :content %>
   </div>
+  <%= form.hidden_field :group_id, :value => @blog.group_id %>
+  <%= form.hidden_field :user_id, :value => current_user.id %>
   <%= form.submit %>
 <% end %>
 
-<%= link_to "ブログ一覧画面にもどる", blogs_path %>
+<%= link_to "Back to Posted List", blogs_path(id: @group.id) %>

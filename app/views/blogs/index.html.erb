@@ -1,10 +1,10 @@
-<h1>日本酒ブログ</h1>
+<h1>Posted List</h1>
 
 <p><%= notice %></p>
 
 <div class="container">
   <div id="new-blog-link">
-    <%= link_to '新規ブログを作成する', new_blog_path %>
+    <%= link_to 'Create New Post', new_blog_path(id: @group.id), class: 'btn btn-primary' %>
   </div>
 
   <div class="row">
@@ -14,8 +14,10 @@
         <p><%= blog.content %></p>
         <div class="blog-links">
           <%= link_to 'Show', blog, class: 'btn btn-default' %>
-          <%= link_to 'Edit', edit_blog_path(blog), class: 'btn btn-info' %> |
-          <%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <% if blog.user_id == current_user.id %>
+            <%= link_to 'Edit', edit_blog_path(blog), class: 'btn btn-info' %> |
+            <%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <% end %>
         </div>
       </div>
     <% end %>

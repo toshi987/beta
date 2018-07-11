@@ -1,0 +1,26 @@
+<h1>Groups</h1>
+
+<p><%= notice %></p>
+
+<div class="container">
+  <div id="new-group-link">
+    <%= link_to 'Create new group', new_group_path %>
+  </div>
+
+  <div class="row">
+    <% @groups.each do |group| %>
+      <div class="col-xs-12 col-md-6 group-panel">
+        <h2>Group name:<%= group.groupname %></h2>
+        <p>Description:<%= group.content %></p>
+        <p>Owner name:<%= group.user_id %></p>
+        <div class="group-links">
+          <%= link_to 'Show', blogs_path(id: group.id), class: 'btn btn-primary' %>
+          <% if group.user_id == current_user.id %>
+            <%= link_to 'Edit', edit_group_path(group), class: 'btn btn-info' %> |
+            <%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
